@@ -31,10 +31,10 @@ const port = process.env.PORT || 5000;
 
 
 app.post("/login",async (req,res)=>{
-    const {signature,address,count} = req.body
-    const hash = await ethers.utils.keccak256(address+count)
+    const {signature,address} = req.body
+    const hash = await ethers.utils.keccak256(address)
     const recoveredAddress = ethers.utils.verifyMessage(ethers.utils.arrayify(hash), signature)
-    console.log(signature,address,count,recoveredAddress)
+    console.log(signature,address,recoveredAddress)
     if(recoveredAddress.toLowerCase()==address.toLowerCase()){
         console.log('tasdf')
          res.json(true)
